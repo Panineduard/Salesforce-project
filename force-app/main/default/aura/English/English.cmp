@@ -1,0 +1,22 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable" description="English"
+                controller="EnglishController">
+    <aura:attribute type="List" name="words" access="private"/>
+    <aura:attribute type="Object" name="currentObject" access="private"/>
+    <aura:attribute type="String" name="mode" access="private" default="enToRus"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.onChangeMode}"/>
+
+
+    <lightning:select label="Choose the mode" value="{!v.mode}" onchange="{!c.onChangeMode}">
+        <option value="enToRus">English to Russian</option>
+        <option value="rusToEng">Russian to English</option>
+        <option value="prepositions">Prepositions</option>
+    </lightning:select>
+
+        <div class="slds-text-heading_large slds-col slds-m-horizontal--small slds-align--absolute-center slds-m-top--medium">{!v.currentObject.question}</div>
+        <lightning:input class="slds-col slds-m-horizontal--small" type="text" value="{!v.currentObject.input}" name="{!v.currentObject.answer}" label="Your answer" onchange="{!c.onCheckAnswer}"/>
+    <lightning:buttonGroup class="slds-align--absolute-center slds-m-top--medium">
+        <lightning:button label="Show Answer" onclick="{!c.onShowAnswer}"/>
+        <lightning:button label="Next" onclick="{!c.onRefresh}"/>
+    </lightning:buttonGroup>
+</aura:component>

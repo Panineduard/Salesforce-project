@@ -1,0 +1,44 @@
+<aura:component description="CertificationQuestion">
+    <aura:attribute name="question" type="Object" access="public"/>
+    <aura:attribute name="state" type="String" access="private"/>
+    <aura:attribute name="index" type="String" access="public"/>
+
+    <lightning:card title="{!'Question ' + (v.index + 1)}">
+        <aura:set attribute="actions">
+            <lightning:buttonGroup >
+                <lightning:buttonIcon alternativeText="Open Question" iconName="utility:open" onclick="{!c.doOpenQuestion}"/>
+                <lightning:button label="Check" disabled="{!not(empty(v.state))}" onclick="{!c.checkAnswer}"/>
+            </lightning:buttonGroup>
+        </aura:set>
+        <aura:if isTrue="{#not(empty(v.question.tip))}">
+            <lightning:helptext content="{#v.question.tip}"/>
+        </aura:if>
+        <div class="slds-p-horizontal_small slds-text-heading_medium">{#v.question.question}</div>
+        <lightning:layout multipleRows="true">
+            <aura:iteration items="{!v.question.answers}" var="item">
+                <lightning:layoutItem padding="around-small" flexibility="no-flex" size="6">
+                    <lightning:input label="{!item.answer}" class="{!item.hasError ? 'slds-has-error' : ''}" type="checkbox" checked="{!item.selected}"/>
+                </lightning:layoutItem>
+            </aura:iteration>
+            <aura:iteration items="{!v.question.tips}" var="item">
+                <lightning:layoutItem class="slds-m-horizontal--x-small" flexibility="no-flex" size="12">
+                    <a target="_blank" href="{!item}">{!item}</a>
+                </lightning:layoutItem>
+            </aura:iteration>
+        </lightning:layout>
+        <aura:set attribute="footer">
+            <aura:if isTrue="{!v.state == 'valid'}">
+                <div class="slds-grid slds-align--absolute-center">
+                    <lightning:icon iconName="action:approval" size="xx-small" alternativeText="Approved"/>
+                    <div class="slds-m-left--small">Well done!</div>
+                </div>
+            </aura:if>
+            <aura:if isTrue="{!v.state == 'invalid'}">
+                <div class="slds-grid slds-align--absolute-center">
+                    <lightning:icon iconName="utility:error" alternativeText="Error!" variant="error"/>
+                    <div class="slds-m-left--small">Need to improve</div>
+                </div>
+            </aura:if>
+        </aura:set>
+    </lightning:card>
+</aura:component>

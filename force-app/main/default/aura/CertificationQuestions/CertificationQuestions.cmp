@@ -1,0 +1,12 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:appHostable,forceCommunity:availableForAllPageTypes" controller="CertificationController" description="CertificationQuestions" access="global">
+    <aura:attribute type="List" name="questions" access="private"/>
+    <aura:attribute type="Object" name="question" access="private"/>
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+
+    <aura:iteration items="{!v.questions}" var="item" indexVar="index">
+        <div class="slds-m-vertical--xx-small">
+            <c:CertificationQuestion question="{!item}" index="{!index}"/>
+        </div>
+    </aura:iteration>
+
+</aura:component>
