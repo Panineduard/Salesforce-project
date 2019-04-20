@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CertificationQuestion__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <externalId>false</externalId>
+    <label>Certification Question</label>
+    <referenceTo>CertificationQuestion__c</referenceTo>
+    <relationshipLabel>CertificationAnswers</relationshipLabel>
+    <relationshipName>CertificationAnswers</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
